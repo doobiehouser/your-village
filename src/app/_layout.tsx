@@ -18,6 +18,8 @@ export default function RootLayout() {
         <Stack.Screen name="need-help" options={{ title: 'I Need Help' }} />
         <Stack.Screen name="community" options={{ title: 'Community' }} />
         <Stack.Screen name="journey" options={{ title: 'My Journey' }} />
+        <Stack.Screen name="journey-timeline" options={{ title: 'Your Timeline' }} />
+        <Stack.Screen name="professionals" options={{ title: 'My Professionals' }} />
         <Stack.Screen name="profile" options={{ title: 'My Profile' }} />
       </Stack>
     </>
