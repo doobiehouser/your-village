@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { BottomNav } from '@/components/bottom-nav';
 import { PeopleIcon } from '@/components/people-icon';
+import { QuestionIcon } from '@/components/question-icon';
 import {
   INITIAL_MOMENTS,
   JOURNEY_STAGES,
@@ -184,7 +185,7 @@ export default function JourneyScreen() {
                 <Link href="/ask-question" asChild>
                   <Pressable style={({ pressed }) => [styles.quickCard, pressed && styles.pressed]}>
                     <View style={[styles.quickIcon, { backgroundColor: '#EFEEF8' }]}>
-                      <Text style={[styles.quickGlyph, { color: '#8A88B8' }]}>?</Text>
+                      <QuestionIcon bubbleColor="#8A88B8" />
                     </View>
                     <Text style={styles.quickLabel}>Ask a Question</Text>
                   </Pressable>
