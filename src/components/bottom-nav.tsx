@@ -10,7 +10,7 @@ const items = [
   { href: '/', label: 'Home', icon: '⌂' },
   { href: '/community', label: 'Community', icon: 'people' },
   { href: '/need-help', label: 'Village', icon: '✿' },
-  { href: '/ask-question', label: 'Messages', icon: '▣' },
+  { href: '/messages', label: 'Messages', icon: '▣' },
   { href: '/profile', label: 'Profile', icon: '○' },
 ] as const;
 
