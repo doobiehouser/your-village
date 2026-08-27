@@ -92,29 +92,33 @@ export default function HomeScreen() {
             </View>
 
             <Link href="/journey" asChild>
-              <Pressable style={({ pressed }) => [styles.stageCard, pressed && styles.pressed]}>
-                <View style={styles.stageLeft}>
-                  <Text style={styles.stageEyebrow}>You&apos;re in</Text>
-                  <Text style={styles.stageLabel}>{currentStage.label}</Text>
-                  <View style={styles.stageWeekRow}>
-                    <Text style={styles.stageWeekText}>{CURRENT_WEEK} weeks today</Text>
-                    <View style={styles.stageChevronCircle}>
-                      <Text style={styles.stageChevron}>›</Text>
+              <Pressable>
+                {({ pressed }) => (
+                  <View style={[styles.stageCard, pressed && styles.pressed]}>
+                    <View style={styles.stageLeft}>
+                      <Text style={styles.stageEyebrow}>You&apos;re in</Text>
+                      <Text style={styles.stageLabel}>{currentStage.label}</Text>
+                      <View style={styles.stageWeekRow}>
+                        <Text style={styles.stageWeekText}>{CURRENT_WEEK} weeks today</Text>
+                        <View style={styles.stageChevronCircle}>
+                          <Text style={styles.stageChevron}>›</Text>
+                        </View>
+                      </View>
+                    </View>
+                    <View style={styles.stageDivider} />
+                    <View style={styles.stageRight}>
+                      <View style={styles.fruitSmallCircle}>
+                        <Text style={styles.fruitSmallGlyph}>{sizeReference.glyph}</Text>
+                      </View>
+                      <Text style={styles.stageRightText}>
+                        Baby is the size of a <Text style={styles.stageRightTextBold}>{sizeReference.name}</Text>
+                      </Text>
+                    </View>
+                    <View style={styles.fruitBigCircle}>
+                      <Text style={styles.fruitBigGlyph}>{sizeReference.glyph}</Text>
                     </View>
                   </View>
-                </View>
-                <View style={styles.stageDivider} />
-                <View style={styles.stageRight}>
-                  <View style={styles.fruitSmallCircle}>
-                    <Text style={styles.fruitSmallGlyph}>{sizeReference.glyph}</Text>
-                  </View>
-                  <Text style={styles.stageRightText}>
-                    Baby is the size of a <Text style={styles.stageRightTextBold}>{sizeReference.name}</Text>
-                  </Text>
-                </View>
-                <View style={styles.fruitBigCircle}>
-                  <Text style={styles.fruitBigGlyph}>{sizeReference.glyph}</Text>
-                </View>
+                )}
               </Pressable>
             </Link>
 
