@@ -1,17 +1,19 @@
 import { Link, usePathname } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { PeopleIcon } from '@/components/people-icon';
+import { FlowerIcon, HeartIcon, HouseIcon, PeopleOutlineIcon, PlusIcon } from '@/components/bottom-nav-icons';
 
-const ICON_COLOR = '#8D6878';
-const ACTIVE_COLOR = '#748BA9';
+const NAV_BG = '#FFFDFC';
+const LABEL_COLOR = '#948C96';
+const ACTIVE_LABEL_COLOR = '#4F4785';
+const SUBTITLE_COLOR = '#948C96';
 
 const items = [
-  { href: '/', label: 'Home', icon: '⌂' },
-  { href: '/community', label: 'Community', icon: 'people' },
-  { href: '/need-help', label: 'Village', icon: '✿' },
-  { href: '/messages', label: 'Messages', icon: '▣' },
-  { href: '/profile', label: 'Profile', icon: '○' },
+  { href: '/', label: 'Home', subtitle: 'Your daily hub', kind: 'house' },
+  { href: '/community', label: 'Community', subtitle: 'Connect & belong', kind: 'people' },
+  { href: '/ask-question', label: 'Ask / Create', subtitle: 'Ask a question or get help', kind: 'plus' },
+  { href: '/need-help', label: 'Help', subtitle: 'I need help', kind: 'heart-help' },
+  { href: '/journey', label: 'My Journey', subtitle: 'Track your journey', kind: 'flower' },
 ] as const;
 
 export function BottomNav() {
@@ -21,16 +23,20 @@ export function BottomNav() {
       <View style={styles.nav}>
         {items.map((item) => {
           const active = pathname === item.href;
-          const color = active ? ACTIVE_COLOR : ICON_COLOR;
           return (
             <Link key={item.label} href={item.href} asChild>
               <Pressable accessibilityLabel={item.label} style={styles.item}>
-                {item.icon === 'people' ? (
-                  <PeopleIcon color={color} />
-                ) : (
-                  <Text style={[styles.icon, active && styles.active]}>{item.icon}</Text>
-                )}
-                <Text style={[styles.label, active && styles.active]}>{item.label}</Text>
+                <View style={[styles.iconSlot, active && styles.iconSlotActive]}>
+                  {item.kind === 'house' && <HouseIcon size={26} color={active ? ACTIVE_LABEL_COLOR : undefined} />}
+                  {item.kind === 'people' && <PeopleOutlineIcon size={26} color={active ? ACTIVE_LABEL_COLOR : undefined} />}
+                  {item.kind === 'plus' && <PlusIcon size={30} color={active ? ACTIVE_LABEL_COLOR : undefined} />}
+                  {item.kind === 'heart-help' && <HeartIcon size={24} color={active ? ACTIVE_LABEL_COLOR : undefined} />}
+                  {item.kind === 'flower' && <FlowerIcon size={24} color={active ? ACTIVE_LABEL_COLOR : undefined} />}
+                </View>
+                <Text style={[styles.label, active && styles.labelActive]}>{item.label}</Text>
+                <Text style={styles.subtitle} numberOfLines={2}>
+                  {item.subtitle}
+                </Text>
               </Pressable>
             </Link>
           );
@@ -41,10 +47,23 @@ export function BottomNav() {
 }
 
 const styles = StyleSheet.create({
-  shell: { backgroundColor: '#FFFDFC', borderTopWidth: 1, borderTopColor: '#E9DEDA' },
-  nav: { height: 76, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', maxWidth: 640, width: '100%', alignSelf: 'center', paddingHorizontal: 6 },
-  item: { flex: 1, minHeight: 62, alignItems: 'center', justifyContent: 'center', gap: 3 },
-  icon: { color: ICON_COLOR, fontSize: 25, lineHeight: 27 },
-  label: { color: '#705966', fontSize: 10, fontWeight: '600' },
-  active: { color: ACTIVE_COLOR, fontWeight: '800' },
+  shell: { backgroundColor: NAV_BG, borderTopWidth: 1, borderTopColor: '#E9DEDA' },
+  nav: {
+    minHeight: 92,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+    maxWidth: 640,
+    width: '100%',
+    alignSelf: 'center',
+    paddingHorizontal: 4,
+    paddingTop: 10,
+    paddingBottom: 8,
+  },
+  item: { flex: 1, alignItems: 'center', gap: 3, paddingHorizontal: 2 },
+  iconSlot: { height: 30, alignItems: 'center', justifyContent: 'center', opacity: 0.72 },
+  iconSlotActive: { opacity: 1 },
+  label: { color: LABEL_COLOR, fontSize: 11, fontWeight: '800', textAlign: 'center' },
+  labelActive: { color: ACTIVE_LABEL_COLOR },
+  subtitle: { color: SUBTITLE_COLOR, fontSize: 8.5, lineHeight: 11, fontWeight: '600', textAlign: 'center' },
 });

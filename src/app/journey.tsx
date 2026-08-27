@@ -157,7 +157,11 @@ export default function JourneyScreen() {
                     </View>
                     <View style={styles.momentCard}>
                       <View style={[styles.momentBadge, { backgroundColor: `${type.color}26` }]}>
-                        <Text style={[styles.momentBadgeGlyph, { color: type.color }]}>{type.glyph}</Text>
+                        {type.Icon ? (
+                          <type.Icon color={type.color} size={18} />
+                        ) : (
+                          <Text style={[styles.momentBadgeGlyph, { color: type.color }]}>{type.glyph}</Text>
+                        )}
                       </View>
                       <View style={styles.momentCopy}>
                         <Text style={[styles.momentDate, { color: type.color }]}>{moment.date}</Text>

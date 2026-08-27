@@ -17,7 +17,7 @@ export default function RootLayout() {
         <Stack.Screen name="ask-question" options={{ title: 'Ask a Question' }} />
         <Stack.Screen name="need-help" options={{ title: 'I Need Help' }} />
         <Stack.Screen name="community" options={{ title: 'Community' }} />
-        <Stack.Screen name="journey" options={{ title: 'My Journey' }} />
+        <Stack.Screen name="journey" options={{ title: 'My Journey', headerTitleAlign: 'center' }} />
         <Stack.Screen name="journey-timeline" options={{ title: 'Your Timeline' }} />
         <Stack.Screen name="professionals" options={{ title: 'My Professionals' }} />
         <Stack.Screen name="messages" options={{ title: 'Messages' }} />

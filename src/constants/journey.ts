@@ -1,3 +1,7 @@
+import type { ComponentType } from 'react';
+
+import { HeartIcon, MoonIcon, SparkleIcon, SproutIcon, StethoscopeIcon } from '@/components/journey-icons';
+
 export type JourneyStageId = 'ttc' | 'pregnant' | 'postpartum' | 'parenting' | 'loss' | 'different';
 
 export type JourneyStage = {
@@ -16,20 +20,23 @@ export const JOURNEY_STAGES: JourneyStage[] = [
   { id: 'different', label: 'My Journey Is Different', glyph: '❈', color: '#9A8FC4' },
 ];
 
-export type MomentTypeId = 'ttc' | 'moment' | 'appointment' | 'pregnancy' | 'memory';
+export type MomentTypeId = 'ttc' | 'moment' | 'appointment' | 'test' | 'pregnancy' | 'memory';
 
 export type MomentType = {
   id: MomentTypeId;
   label: string;
   glyph: string;
   color: string;
+  /** Optional vector icon rendered in timeline badges; falls back to `glyph` text when omitted. */
+  Icon?: ComponentType<{ color: string; size?: number }>;
 };
 
 export const MOMENT_TYPES: MomentType[] = [
-  { id: 'ttc', label: 'Trying to Conceive', glyph: '✦', color: '#7FA48B' },
-  { id: 'moment', label: 'Big Moment', glyph: '♥', color: '#D98D98' },
-  { id: 'appointment', label: 'Appointment', glyph: '✚', color: '#8799B8' },
-  { id: 'pregnancy', label: 'Pregnancy Milestone', glyph: '❀', color: '#9A8FC4' },
+  { id: 'ttc', label: 'Trying to Conceive', glyph: '✦', color: '#7FA48B', Icon: SproutIcon },
+  { id: 'moment', label: 'Big Moment', glyph: '♥', color: '#D98D98', Icon: HeartIcon },
+  { id: 'appointment', label: 'Appointment', glyph: '✚', color: '#8799B8', Icon: StethoscopeIcon },
+  { id: 'test', label: 'Test Result', glyph: '✳', color: '#C9A15A', Icon: SparkleIcon },
+  { id: 'pregnancy', label: 'Pregnancy Milestone', glyph: '☾', color: '#9A8FC4', Icon: MoonIcon },
   { id: 'memory', label: 'Memory', glyph: '✎', color: '#8A88B8' },
 ];
 
@@ -49,6 +56,6 @@ export const INITIAL_MOMENTS: JourneyMoment[] = [
   { id: 1, date: 'June 2, 2026', title: 'Started trying to conceive', typeId: 'ttc' },
   { id: 2, date: 'July 14, 2026', title: 'Positive ovulation test', typeId: 'moment' },
   { id: 3, date: 'August 5, 2026', title: 'Doctor appointment', typeId: 'appointment' },
-  { id: 4, date: 'September 10, 2026', title: 'Positive pregnancy test', typeId: 'moment' },
+  { id: 4, date: 'September 10, 2026', title: 'Positive pregnancy test', typeId: 'test' },
   { id: 5, date: 'October 1, 2026', title: '6 weeks pregnant — first ultrasound', typeId: 'pregnancy' },
 ];

@@ -28,7 +28,11 @@ export default function JourneyTimelineScreen() {
                     </View>
                     <View style={styles.card}>
                       <View style={[styles.badge, { backgroundColor: `${type.color}26` }]}>
-                        <Text style={[styles.badgeGlyph, { color: type.color }]}>{type.glyph}</Text>
+                        {type.Icon ? (
+                          <type.Icon color={type.color} size={18} />
+                        ) : (
+                          <Text style={[styles.badgeGlyph, { color: type.color }]}>{type.glyph}</Text>
+                        )}
                       </View>
                       <View style={styles.cardCopy}>
                         <Text style={[styles.date, { color: type.color }]}>{moment.date}</Text>
