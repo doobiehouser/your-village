@@ -61,6 +61,9 @@ export default function HomeScreen() {
   const sizeReference = sizeReferenceForWeek(CURRENT_WEEK);
   // Illustration reads as roughly half the hero row's width in the reference design.
   const illustrationSize = Math.round(Math.min(190, Math.max(120, width * 0.42)));
+  // The illustration's height is a hard ceiling for the text column beside it — the
+  // text must never run taller than the image it neighbors.
+  const illustrationHeight = Math.round(illustrationSize * (452 / 415));
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -68,12 +71,17 @@ export default function HomeScreen() {
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
           <View style={styles.content}>
             <View style={styles.heroRow}>
-              <View style={styles.heroText}>
+              <View style={[styles.heroText, { maxHeight: illustrationHeight }]}>
                 <Text style={[styles.title, compact && styles.compactTitle]}>
                   Welcome, Mama <Text style={styles.titleHeart}>♥</Text>
                 </Text>
-                <Text style={styles.tagline}>You don&apos;t have to do this alone.</Text>
-                <Text style={styles.heroBody}>
+                <Text style={[styles.tagline, compact && styles.compactTagline]}>
+                  You don&apos;t have to do this alone.
+                </Text>
+                <Text
+                  style={[styles.heroBody, compact && styles.compactHeroBody]}
+                  numberOfLines={compact ? 3 : 4}
+                >
                   Your Village is a safe, supportive community of moms here to help you ask, share, connect, and
                   get through every stage of motherhood.
                 </Text>
@@ -191,13 +199,15 @@ const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 640, paddingHorizontal: 20 },
 
   heroRow: { flexDirection: 'row', alignItems: 'flex-start', paddingTop: 24, gap: 14 },
-  heroText: { flex: 1, minWidth: 0 },
+  heroText: { flex: 1, minWidth: 0, overflow: 'hidden' },
   heroArt: { flexShrink: 0 },
   title: { color: '#2E2740', fontSize: 27, lineHeight: 34, fontWeight: '800', fontFamily: Fonts.serif },
-  compactTitle: { fontSize: 23 },
+  compactTitle: { fontSize: 21, lineHeight: 26 },
   titleHeart: { color: '#7F6690' },
   tagline: { color: '#2E2740', fontSize: 16, fontWeight: '600', marginTop: 6 },
+  compactTagline: { fontSize: 14, lineHeight: 18, marginTop: 4 },
   heroBody: { color: '#4A434E', fontSize: 14, lineHeight: 20, marginTop: 10 },
+  compactHeroBody: { fontSize: 12.5, lineHeight: 17, marginTop: 6 },
 
   stageCard: {
     flexDirection: 'row',
