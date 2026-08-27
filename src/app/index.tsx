@@ -56,11 +56,15 @@ function AvatarGlyph({ color, size = 34 }: { color: string; size?: number }) {
 
 export default function HomeScreen() {
   const { width } = useWindowDimensions();
-  const compact = width < 380;
+  // Almost every phone (320-430pt) needs the compact hero treatment — only tablets/desktop
+  // have enough spare width to run the larger type scale next to a same-row illustration.
+  const compact = width < 500;
   const currentStage = JOURNEY_STAGES.find((stage) => stage.id === 'pregnant') ?? JOURNEY_STAGES[0];
   const sizeReference = sizeReferenceForWeek(CURRENT_WEEK);
-  // Illustration reads as roughly half the hero row's width in the reference design.
-  const illustrationSize = Math.round(Math.min(190, Math.max(120, width * 0.42)));
+  // Keep the illustration narrow enough that the text column beside it has room to hold
+  // "Welcome, Mama" on one line on real phone widths (previously 0.42/190 max squeezed the
+  // text column so hard the title itself wrapped in two lines).
+  const illustrationSize = Math.round(Math.min(160, Math.max(100, width * 0.36)));
   // The illustration's height is a hard ceiling for the text column beside it — the
   // text must never run taller than the image it neighbors.
   const illustrationHeight = Math.round(illustrationSize * (452 / 415));
@@ -72,15 +76,20 @@ export default function HomeScreen() {
           <View style={styles.content}>
             <View style={styles.heroRow}>
               <View style={[styles.heroText, { maxHeight: illustrationHeight }]}>
-                <Text style={[styles.title, compact && styles.compactTitle]}>
+                <Text
+                  style={[styles.title, compact && styles.compactTitle]}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                  minimumFontScale={0.75}
+                >
                   Welcome, Mama <Text style={styles.titleHeart}>♥</Text>
                 </Text>
-                <Text style={[styles.tagline, compact && styles.compactTagline]}>
+                <Text style={[styles.tagline, compact && styles.compactTagline]} numberOfLines={1}>
                   You don&apos;t have to do this alone.
                 </Text>
                 <Text
                   style={[styles.heroBody, compact && styles.compactHeroBody]}
-                  numberOfLines={compact ? 3 : 4}
+                  numberOfLines={6}
                 >
                   Your Village is a safe, supportive community of moms here to help you ask, share, connect, and
                   get through every stage of motherhood.
@@ -206,12 +215,12 @@ const styles = StyleSheet.create({
   heroText: { flex: 1, minWidth: 0, overflow: 'hidden' },
   heroArt: { flexShrink: 0 },
   title: { color: '#2E2740', fontSize: 27, lineHeight: 34, fontWeight: '800', fontFamily: Fonts.serif },
-  compactTitle: { fontSize: 21, lineHeight: 26 },
+  compactTitle: { fontSize: 19, lineHeight: 24 },
   titleHeart: { color: '#7F6690' },
   tagline: { color: '#2E2740', fontSize: 16, fontWeight: '600', marginTop: 6 },
-  compactTagline: { fontSize: 14, lineHeight: 18, marginTop: 4 },
+  compactTagline: { fontSize: 13, lineHeight: 17, marginTop: 4 },
   heroBody: { color: '#4A434E', fontSize: 14, lineHeight: 20, marginTop: 10 },
-  compactHeroBody: { fontSize: 12.5, lineHeight: 17, marginTop: 6 },
+  compactHeroBody: { fontSize: 12, lineHeight: 16, marginTop: 6 },
 
   stageCard: {
     flexDirection: 'row',
