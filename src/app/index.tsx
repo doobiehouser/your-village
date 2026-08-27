@@ -75,7 +75,9 @@ export default function HomeScreen() {
                   get through every stage of motherhood.
                 </Text>
               </View>
-              <WelcomeIllustration size={compact ? 100 : 128} />
+              <View style={styles.heroArt}>
+                <WelcomeIllustration size={compact ? 100 : 128} />
+              </View>
             </View>
 
             <Link href="/journey" asChild>
@@ -186,7 +188,8 @@ const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 640, paddingHorizontal: 20 },
 
   heroRow: { flexDirection: 'row', alignItems: 'flex-start', paddingTop: 24, gap: 14 },
-  heroText: { flex: 1 },
+  heroText: { flex: 1, minWidth: 0 },
+  heroArt: { flexShrink: 0 },
   title: { color: '#302B41', fontSize: 27, lineHeight: 34, fontWeight: '800' },
   compactTitle: { fontSize: 23 },
   titleHeart: { color: '#684D69' },
@@ -210,7 +213,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   pressed: { opacity: 0.8, transform: [{ scale: 0.99 }] },
-  stageLeft: { flex: 1.1 },
+  stageLeft: { flex: 1.1, minWidth: 0 },
   stageEyebrow: { color: '#6B6072', fontSize: 13, fontWeight: '600' },
   stageLabel: { color: '#2E2A38', fontSize: 20, fontWeight: '800', marginTop: 1 },
   stageWeekRow: { flexDirection: 'row', alignItems: 'center', marginTop: 6, gap: 6 },
@@ -226,7 +229,7 @@ const styles = StyleSheet.create({
   },
   stageChevron: { color: '#C97388', fontSize: 12, fontWeight: '800', marginLeft: 1 },
   stageDivider: { width: 1, alignSelf: 'stretch', backgroundColor: '#EDE2DE', marginHorizontal: 14 },
-  stageRight: { flex: 1, alignItems: 'flex-start', paddingRight: 30 },
+  stageRight: { flex: 1, minWidth: 0, alignItems: 'flex-start' },
   fruitSmallCircle: {
     width: 30,
     height: 30,
@@ -242,6 +245,7 @@ const styles = StyleSheet.create({
   fruitBigCircle: {
     width: 46,
     height: 46,
+    flexShrink: 0,
     borderRadius: 23,
     backgroundColor: '#EFE3DA',
     alignItems: 'center',
@@ -250,8 +254,8 @@ const styles = StyleSheet.create({
   fruitBigGlyph: { fontSize: 24 },
 
   sectionTitle: { color: '#2E2A38', fontSize: 18, fontWeight: '800', marginTop: 26, marginBottom: 14 },
-  supportRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  supportItem: { flex: 1, alignItems: 'center', paddingHorizontal: 3 },
+  supportRow: { flexDirection: 'row' },
+  supportItem: { flex: 1, minWidth: 0, alignItems: 'center', paddingHorizontal: 3 },
   supportCircle: { width: 62, height: 62, borderRadius: 31, alignItems: 'center', justifyContent: 'center' },
   supportBubbleDots: { fontSize: 18, fontWeight: '800', letterSpacing: 1, marginTop: -2 },
   supportHeart: { position: 'absolute', fontSize: 24, top: 12 },
@@ -270,11 +274,11 @@ const styles = StyleSheet.create({
     padding: 20,
     gap: 14,
   },
-  communityText: { flex: 1.3 },
+  communityText: { flex: 1.3, minWidth: 0 },
   communityTitle: { color: '#2E2A38', fontSize: 18, fontWeight: '800' },
   communityHeart: { color: '#C97388' },
   communityBody: { color: '#544D5C', fontSize: 13, lineHeight: 18, marginTop: 8 },
-  communityStat: { alignItems: 'center' },
+  communityStat: { alignItems: 'center', flexShrink: 0 },
   avatarRow: { flexDirection: 'row' },
   avatarWrap: { borderWidth: 2, borderColor: '#EFEAF5', borderRadius: 20 },
   avatarGlyph: {},
@@ -295,6 +299,7 @@ const styles = StyleSheet.create({
   quoteBadge: {
     width: 34,
     height: 34,
+    flexShrink: 0,
     borderRadius: 17,
     backgroundColor: '#F5DEE1',
     alignItems: 'center',
@@ -302,10 +307,10 @@ const styles = StyleSheet.create({
     marginRight: 14,
   },
   quoteMark: { color: '#C97388', fontSize: 20, fontWeight: '800', marginTop: -4 },
-  encouragementCopy: { flex: 1 },
+  encouragementCopy: { flex: 1, minWidth: 0 },
   encouragementTitle: { color: '#303047', fontSize: 17, fontWeight: '800', marginBottom: 8 },
   encouragementText: { color: '#474154', fontSize: 14.5, lineHeight: 20 },
-  encouragementFlower: { color: '#D99A6C', fontSize: 30, marginLeft: 10, marginTop: 2 },
+  encouragementFlower: { color: '#D99A6C', fontSize: 30, marginLeft: 10, marginTop: 2, flexShrink: 0 },
 
   footerTagline: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 22 },
   footerHeart: { color: '#D8A7B2', fontSize: 15 },

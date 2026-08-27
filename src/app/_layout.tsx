@@ -1,7 +1,24 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
+import { Platform } from 'react-native';
 
 export default function RootLayout() {
+  useEffect(() => {
+    // This app is light-themed only. On web, some mobile browsers (e.g. Chrome's
+    // "Dark mode for web contents") will auto-invert pages that never declare a
+    // color scheme, which breaks our colors. Declaring "light" opts us out.
+    if (Platform.OS === 'web' && typeof document !== 'undefined') {
+      let meta = document.querySelector('meta[name="color-scheme"]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', 'color-scheme');
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', 'light');
+    }
+  }, []);
+
   return (
     <>
       <StatusBar style="dark" />
