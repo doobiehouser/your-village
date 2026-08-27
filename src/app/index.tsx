@@ -7,6 +7,7 @@ import { PeopleIcon } from '@/components/people-icon';
 import { WelcomeIllustration } from '@/components/welcome-illustration';
 import { JOURNEY_STAGES } from '@/constants/journey';
 import { sizeReferenceForWeek } from '@/constants/pregnancy';
+import { Fonts } from '@/constants/theme';
 
 const actions = [
   {
@@ -58,6 +59,8 @@ export default function HomeScreen() {
   const compact = width < 380;
   const currentStage = JOURNEY_STAGES.find((stage) => stage.id === 'pregnant') ?? JOURNEY_STAGES[0];
   const sizeReference = sizeReferenceForWeek(CURRENT_WEEK);
+  // Illustration reads as roughly half the hero row's width in the reference design.
+  const illustrationSize = Math.round(Math.min(190, Math.max(120, width * 0.42)));
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -76,7 +79,7 @@ export default function HomeScreen() {
                 </Text>
               </View>
               <View style={styles.heroArt}>
-                <WelcomeIllustration size={compact ? 100 : 128} />
+                <WelcomeIllustration size={illustrationSize} />
               </View>
             </View>
 
@@ -190,11 +193,11 @@ const styles = StyleSheet.create({
   heroRow: { flexDirection: 'row', alignItems: 'flex-start', paddingTop: 24, gap: 14 },
   heroText: { flex: 1, minWidth: 0 },
   heroArt: { flexShrink: 0 },
-  title: { color: '#302B41', fontSize: 27, lineHeight: 34, fontWeight: '800' },
+  title: { color: '#2E2740', fontSize: 27, lineHeight: 34, fontWeight: '800', fontFamily: Fonts.serif },
   compactTitle: { fontSize: 23 },
-  titleHeart: { color: '#684D69' },
-  tagline: { color: '#403A4C', fontSize: 16, fontWeight: '600', marginTop: 4 },
-  heroBody: { color: '#5B5261', fontSize: 14, lineHeight: 20, marginTop: 10 },
+  titleHeart: { color: '#7F6690' },
+  tagline: { color: '#2E2740', fontSize: 16, fontWeight: '600', marginTop: 6 },
+  heroBody: { color: '#4A434E', fontSize: 14, lineHeight: 20, marginTop: 10 },
 
   stageCard: {
     flexDirection: 'row',
